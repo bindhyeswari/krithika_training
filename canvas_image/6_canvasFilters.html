@@ -18,7 +18,7 @@
             border-radius: 0.25em;
         }
 
-        span.button{
+        .button{
             font: 500 0.85em 'Helvetica Neue';
             display: inline-block;
             line-height: 3em;
@@ -26,6 +26,7 @@
             color: white;
             cursor: pointer;
             user-select:none;
+            text-decoration: none;
         }
 
         span.button:hover {
@@ -104,7 +105,7 @@
         gllImageFilter.applyFilter = function(canvas, filter){
             var context = canvas.getContext('2d');
             var image_data = context.getImageData(0,0,canvas.width, canvas.height);
-            console.log(image_data);
+            // console.log(image_data); - DO NOT USE if image is large
             filter(image_data);
             context.putImageData(image_data, 0, 0);
         };
@@ -118,6 +119,7 @@
                 ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
             };
         };
+        // todo: transparency
         gllImageFilter.transparent = function(img_data){
             for (var i = 0; i < img_data.data.length; i+=4){
                 img_data[i+3] = 0.5;
@@ -131,30 +133,37 @@
             document.getElementById('btn_reset').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.reset(canvas, 'img/thailand.jpg');
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_grayscale').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.grayscale);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_brighten').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.brighten);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_threshold').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.threshold);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_darken').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.darken);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_transparent').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.transparent);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
             document.getElementById('btn_blue').onclick = function(){
                 var canvas = document.getElementById('canvas');
                 gllImageFilter.applyFilter(canvas, gllImageFilter.blue);
+                document.getElementById('download_image').href = canvas.toDataURL();
             };
         };
 
@@ -169,6 +178,7 @@
     <span class="button" id="btn_threshold">Threshold</span>
     <span class="button" id="btn_transparent">Transparency</span>
     <span class="button" id="btn_blue">Blue</span>
+    <a class="button" id="download_image" href="" download="image.jpg">Download</a>
 </header>
 <div class="container">
 

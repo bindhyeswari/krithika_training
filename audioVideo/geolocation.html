@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        if (navigator && navigator.geolocation) {
+            console.log('Geolocation enabled for..' + navigator.userAgent);
+            /*navigator.geolocation.getCurrentPosition(function(position){
+                console.log(position);
+                var date = new Date(position.timestamp / 1000);
+                console.log(date.toString());
+                console.log(position.coords.latitude);
+                console.log(position.coords.longitude);
+            }, function(){});*/
+
+            var geolocation_id = navigator.geolocation.watchPosition(function(position){
+                console.log(position.time);
+                var date = new Date(position.timestamp / 1000);
+                console.log(date.toString());
+                console.log(position.coords.latitude);
+                console.log(position.coords.longitude);
+            });
+
+            setTimeout(function(){
+                console.log('switched off watch');
+                navigator.geolocation.clearWatch(geolocation_id);
+            }, 10000);
+        }
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

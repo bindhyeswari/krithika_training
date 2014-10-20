@@ -6,7 +6,6 @@
     <script src="modernizr.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-
             if( Modernizr.canvas ) {
                 var img = new Image();
                 img.src = 'img/html.jpg';
@@ -22,7 +21,8 @@
                         multiplier += 1;
                         multiplier === 1500  ? (function(){
                             clearInterval(interval_id);
-                            context.globalAlpha = 0.4;
+
+                            /*context.globalAlpha = 0.4;
                             context.fillStyle = '#aaa';
                             context.font = '3em Avenir';
                             context.textBaseline = 'top';
@@ -33,13 +33,13 @@
                             var url = canvas.toDataURL();
                             imgx.src = url;
                             document.body.appendChild(imgx);
-
+*/
 
                         }()) : false;
-                        var h = 0.7 * multiplier;
-                        var m = 0.4 * multiplier;
+                        var width = 0.7 * multiplier;
+                        var height = 0.4 * multiplier;
                         div.innerHTML = multiplier;
-                        context.drawImage(self, 175, 50, 350, 200,  0, 0, h, m);
+                        context.drawImage(self, 175, 50, 350, 200,  0, 0, width, height);
                     }, 1);
                 });
 

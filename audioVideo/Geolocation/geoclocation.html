@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <style>
+        body{
+            font: 100 1em 'Open Sans'';
+        color: #555;
+        }
+    </style>
+    <script>
+        if (navigator && navigator.geolocation) {
+            console.log(navigator.geolocation);
+
+            navigator.geolocation.getCurrentPosition(function(position){
+                console.log(position);
+            }, function(){
+                // Error codes:
+            // 0 - Unknown
+            // 1 - Permission Denied
+            // 2 - Position Unavailable
+            // 3 - Timeout
+            });
+
+            var geo_watch_id = navigator.geolocation.watchPosition(function(position){
+                console.log(position);
+                console.log((new Date(position.timestamp / 1000)).toString());
+                console.log(geo_watch_id);
+            });
+
+            setTimeout(function(){
+                navigator.geolocation.clearWatch(geo_watch_id);
+                console.log('Cleared out watch...');
+            }, 60000)
+            
+            
+        }
+
+    </script>
+</head>
+<body>
+<a href="http://www.w3.org/TR/geolocation-API/#navi-geo">Geolocation API Details</a>
+
+</body>
+</html>
